@@ -47,3 +47,25 @@ const myFunction = function(){
 }
 
 console.log(typeof anotherId);
+
+//********************************************************************
+
+/* stack(primitive) and heap(non=primitive) memory*/
+
+let userName ="Harish"
+
+let userName2 = userName  //copy of userName assigned to userName2..... 
+userName2 ="Girish" //not effect the userName
+
+console.log(userName); 
+console.log(userName2);
+
+let userDetails={
+    userName:"Narayana",
+    email:"nani@gmail.com"
+}
+
+let userDetails2 = userDetails //userDetails reference copied to userDetails2
+userDetails2.email="narayana@gmail.com"  // changing userDetails2 effect the userDetails
+console.log(userDetails);
+console.log(userDetails2);
