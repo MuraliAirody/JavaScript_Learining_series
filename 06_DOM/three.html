@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning JS</title>
+</head>
+<body style="background-color: #000000; color: white;">
+    
+</body>
+<script>
+    const div = document.createElement("div")
+    console.log(div);
+    div.className = "div-name"
+    div.id = "unique"
+    div.setAttribute("style","padding:15px;border-radius:10px")
+    div.style.backgroundColor = "green"
+    div.style.color = "black"
+
+    div.innerHTML = "<span>"
+    div.firstChild.innerText = "Learning Java Script"
+    
+    //alternative for above inner Text, inner text Override the existing text
+    const text = document.createTextNode("Learning Java script")
+    div.firstChild.appendChild(text);
+
+    document.body.appendChild(div)
+</script>
+</html>
