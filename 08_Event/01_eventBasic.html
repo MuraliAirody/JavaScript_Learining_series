@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #2f2e2e;color: white;">
+     <div id="images">
+        <h2>Images</h2>
+
+        <ul id="img">
+            <li><img width="200px" height="150px" id="img1" class="image1 image2 image3" src="https://cdn.stocksnap.io/img-thumbs/960w/halloween-candy_ECICLHJMAZ.jpg" alt=""></li>
+            <li><img width="200px" height="150px" id="img2" src="https://cdn.stocksnap.io/img-thumbs/960w/pumpkins-basket_NFS944393R.jpg" alt=""></li>
+            <li><img width="200px" height="150px" id="img3" src="https://cdn.stocksnap.io/img-thumbs/960w/colored%20pencils-different_27KR2D6XW2.jpg" alt=""></li>
+            <li><img width="200px" height="150px" id="img4" src="https://cdn.stocksnap.io/img-thumbs/960w/leaves-foliage_KYWXJEG0OK.jpg" alt=""></li>
+            <li><img width="200px" height="150px" id="img5" src="https://cdn.stocksnap.io/img-thumbs/960w/tree-fall%20colors_UJVEAF3EDV.jpg" alt=""></li>
+            <a style="color: aliceblue;" href="https://google.com" id="google">Google</a>
+        </ul>
+     </div>
+</body>
+<script>
+    // document.getElementById("img1").onclick = function(){
+    //     alert("image 1 clicked")
+    // }
+
+    // document.getElementById("img1").addEventListener('click',(e)=>{
+    // //    alert("image 1 clicked")
+    //       console.log(e);
+    //       console.log(e.target.classList);
+    //       console.log(e.target.id);
+    // })
+
+    // type, timestamp, defaultPrevented
+    // target, toElement, srcElement, currentTarget,
+    // clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keyCode
+
+    //Event propagation, capturing, bubbling
+    //by default event propagation is false, which means 
+    /* 
+    Bubbling
+      When an event happens on a component, it first runs the event handler on it, 
+      then on its parent component, then all the way up on other ancestors’ components.
+      By default, all event handles through this order from center component event to 
+      outermost component event
+
+    Capturing 
+      It is the opposite of bubbling. 
+      The event handler is first on its parent component and then on the component 
+      where it was actually wanted to fire that event handler. 
+      In short, it means that the event is first captured by the outermost element and 
+      propagated to the inner elements. It is also called trickle down.  
+    */
+
+    /*
+    document.getElementById("images").addEventListener('click',(e)=>{
+       console.log("clicked on parent DIV")
+       e.stopPropagation() //stop the propagation from inside to outside/outside to inside.target the event on whichever it is applied
+    },false)
+    document.getElementById("img").addEventListener('click',(e)=>{
+       console.log("clicked on child ul to DIV and Parent ul to li")
+       e.stopPropagation()
+    },false)
+    document.getElementById("img1").addEventListener('click',(e)=>{
+       console.log("clicked on child li")
+       e.stopPropagation()
+    },false)
+
+    */
+
+    document.getElementById("google").addEventListener("click",(e)=>{
+        console.log("clicked on google link");
+        e.preventDefault();
+        // e.stopPropagation()
+    })
+
+    //from 'e' event object we can target the clicked element, from that we can get id,class,tagName ...
+
+    document.getElementById("images").addEventListener("click",(e)=>{
+        e.preventDefault()
+        console.log(e.target);
+        console.log(`clicked id ${e.target.id}`)
+        console.log(`clicked  tag ${e.target.tagName}`)
+        console.log(`parent node of clicked element `,e.target.parentNode);
+
+        if(e.target.tagName === 'IMG'){
+            const parentElement = e.target.parentNode
+        parentElement.remove()
+        }
+    })
+</script>
+</html>
