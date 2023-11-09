@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: black;color: aliceblue;">
+    <h1>JavaScript</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    const helloWorld = function(){
+        console.log("hello world ",new Date().toLocaleTimeString());
+    }
+    const changeText = function(){
+        console.log("before text change ",new Date().toLocaleTimeString())
+        document.querySelector('h1').innerHTML = "Wonderful JS"
+        console.log("after text change ",new Date().toLocaleTimeString())
+
+    }
+
+    const changeMe = setTimeout(changeText, 2000)  //async call
+    helloWorld();
+    document.querySelector('#stop').addEventListener('click', function(){
+        clearTimeout(changeMe)
+        console.log("STOPPED")
+    })
+</script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: black;color: aliceblue;">
+    <h1>Javascript</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    const sayDate = function(str){
+        console.log("interval adding");
+        console.log(str, new Date().toLocaleTimeString());
+    }
+
+    let intervalId
+    const start = document.getElementById("start")
+    const stop = document.getElementById("stop")
+
+    start.addEventListener("click",()=>{
+        intervalId = setInterval(sayDate, 1000, "hi")
+    })
+    stop.addEventListener("click",()=>{
+        clearInterval(intervalId)
+        console.log("interval stopped");
+    })
+
+</script>
+</html>
