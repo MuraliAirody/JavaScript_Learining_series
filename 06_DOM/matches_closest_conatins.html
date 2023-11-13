@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: black;color: white;">
+    <div class="main">
+        <div class="sub" id="id1">this is sub div1 <span class="span1">Hello World</span></div>
+        <div id="id2">this is sub div2</div>
+    </div>
+
+    <script>
+         const id1 = document.getElementById("id1")
+         const id2 = document.getElementById("id2")
+         const span1 = document.querySelector("span")
+
+         //matches
+         console.log(id1.matches(".sub")) //true, checking the element matches the given CSS selector
+         console.log(id2.matches(".sub")) //false, the element div which is having #id2 don't have any class names .sub in it
+
+         //closest
+         /*
+            which always returns the nearest ancestor of the given CSS selector, the element it self is also checked
+          */
+         console.log(id1.closest("div")) //return the div which is having id "#id1"
+         console.log(span1.closest("#id1")) //return the div which is having "#id1"
+         console.log(span1.closest("span")) //return the span itself
+         console.log(id1.closest(".span1")) //return null as a answer, bcz there is no ancestor of #id1 having the class name .span1
+
+         //contains
+        /* 
+          returns true if element b inside element a
+        */
+         console.log(id1.contains(span1)) //true,          
+         console.log(span1.contains(span1)) //true,          
+         console.log(span1.contains(id1)) //false,          
+
+    </script> 
+</body>
+</html>
