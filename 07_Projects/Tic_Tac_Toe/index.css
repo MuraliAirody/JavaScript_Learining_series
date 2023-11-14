@@ -1,0 +1,37 @@
+.cell {
+    width:75px;
+    height: 75px;
+    border: 2px solid ;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 2px;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.cellContainer{
+        display: flex;
+        flex-wrap: wrap;
+        width: 225px;
+        height: 225px;
+        margin: auto;
+        text-align: center;
+}
+
+
+
+.gameContainer{
+    font-family:"permanent marker",cursive;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: auto;
+    align-items: center;
+}
+
+.resetBtn{
+    font-family:"permanent marker",cursive;
+    padding: 20px;
+    background-color: yellow;
+    border-radius: 20px;
+    cursor: pointer;
+}
