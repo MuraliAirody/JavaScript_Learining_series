@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>before parent</p>
+    <div class="main">
+        <p>Hello world</p>
+        <p>Hello hi</p>
+        <p>Hello guys</p>
+    </div>
+    <p>after parent</p>
+</body>
+<script>
+      const parent = document.querySelector(".main")
+      const div = document.createElement("div")
+      div.innerHTML = "<h1>Heading</h1>"
+
+      parent.append(div)  //adding the heading at the end of the parent div (inside the div only)
+    //   parent.prepend(div)    // adding the heading at the beginning of the parent div (inside the div only)
+    //  parent.before(div)     // adding the heading at the beginning of the parent div (outside the div only) 
+    // parent.after(div) // adding the heading at the after the parent div (outside the div only)
+    
+    // parent.replaceWith(div) //replace the entire parent div with the created div
+
+    
+</script>
+</html>
