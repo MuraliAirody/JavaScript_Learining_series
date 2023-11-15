@@ -105,3 +105,36 @@ fetch('https://api.github.com/users/MuraliAirody')
 }).catch((error)=>{
     console.log(error);
 })
+
+
+
+fetch('htt://api.github.com/users/MuraliAirody')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Fetch completed:', data);
+  }).catch((error)=>{
+    console.error(error)
+  })
+
+// Using Promise with setTimeout and 0ms timeout (macro-task)
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise with setTimeout completed');
+  }, 0);
+});
+
+myPromise.then(result => {
+  console.log(result);
+});
+
+/* 
+ The micro-task (Promise task) executes before the macro-task (fetch,Timeout task),
+ demonstrating the priority of the micro-task queue over the macro-task queue.
+
+fetch initiates a network request (macro-task).
+The fetch function returns a Promise.
+The first .then callback, which parses the JSON response, is added to the micro-task queue.
+The second .then callback, which contains the console.log statement, is also added to the micro-task queue.
+When the macro-task (network request) is complete, the micro-task queue is processed, and the .then callbacks are executed.
+
+*/
