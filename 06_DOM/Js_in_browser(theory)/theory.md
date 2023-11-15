@@ -49,7 +49,7 @@ Once the calculation is done, it assigns the value of square in the 'ans' variab
 
 The returned value from square() will be assigned on square1. This happens for square2 also. Once the entire code execution is done completely, the global context will look like this and it will be destroyed also.
 
-refer Execution context and call stack from freeCodeCamp(here)[https://www.freecodecamp.org/news/how-javascript-works-behind-the-scene-javascript-execution-context/]
+refer Execution context and call stack from freeCodeCamp [here](https://www.freecodecamp.org/news/how-javascript-works-behind-the-scene-javascript-execution-context/)
 
 ## Script tag
 
