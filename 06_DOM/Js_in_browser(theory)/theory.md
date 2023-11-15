@@ -1,3 +1,4 @@
+
 ## JavaScript Execution Context – How JS Works Behind the Scenes
 
 When the JavaScript engine scans a script file, it makes an environment called the Execution Context that handles the entire transformation and execution of the code.
@@ -50,6 +51,10 @@ Once the calculation is done, it assigns the value of square in the 'ans' variab
 The returned value from square() will be assigned on square1. This happens for square2 also. Once the entire code execution is done completely, the global context will look like this and it will be destroyed also.
 
 refer Execution context and call stack from freeCodeCamp [here](https://www.freecodecamp.org/news/how-javascript-works-behind-the-scene-javascript-execution-context/)
+<br>
+<br>
+<br>
+<br>
 
 ## Script tag
 
@@ -61,7 +66,10 @@ refer Execution context and call stack from freeCodeCamp [here](https://www.free
 2. Browser caching (the browser will load the script file only once; even if it is commented down after the load, it will store the file inside the cache and increase the response speed).
 
 Note: if the both internal and external script present at a time, script tag only consider external script ('src') which have higher priority.
-
+<br>
+<br>
+<br>
+<br>
 
 ## DOM
 
@@ -91,7 +99,7 @@ document.body.firstElementChild.nodeName // return the first element only eg:<di
 
 ### Creation of element and Insertion
 
-###### (available in file three.html)[https://github.com/MuraliAirody/JavaScript_Learning_series/blob/main/06_DOM/three.html]
+###### [available in file three.html](https://github.com/MuraliAirody/JavaScript_Learning_series/blob/main/06_DOM/three.html)
 
 
 some other properties used while insertion of node 
@@ -114,7 +122,7 @@ some other properties used while insertion of node
 
    //replace the node with given node  
 
-###### (check the code in the five.html)[https://github.com/MuraliAirody/JavaScript_Learning_series/blob/main/06_DOM/five.html] 
+###### [check the code in the five.html](https://github.com/MuraliAirody/JavaScript_Learning_series/blob/main/06_DOM/five.html)
 
 ##### append can accept multiple arguments and can add multiple items at once, while appendChild can only accept one argument and can add only one item at a time.
 ##### append can accept a DOMString as an argument, while appendChild can only accept a Node object.
