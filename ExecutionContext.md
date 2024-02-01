@@ -67,3 +67,42 @@ In this case, the variable bar is hoisted, but it's initialized with undefined. 
 ![Screenshot 2024-01-09 182839](https://github.com/MuraliAirody/JavaScript_Learning_series/assets/71452201/2fcf6c80-4b5b-4e6e-82a6-9d40ef8e7e54)
 ![Screenshot 2024-01-09 183028](https://github.com/MuraliAirody/JavaScript_Learning_series/assets/71452201/bed2c315-8c7d-4d14-8990-8c8e2029d930)
 
+
+
+# window 
+
+In a browser environment, when the global execution context is created, it indeed creates a global object, which is typically referred to as window. In this context, window and this both refer to the global object, so window === this is true.
+
+However, within a function execution context, the value of this depends on how the function is called. If a function is a regular function invocation, then this inside the function refers to the global object (window in the browser). However, if the function is a method of an object , the value of this can be different.
+```js
+console.log(window === this); // true
+
+function exampleFunction() {
+  console.log(this === window); // true
+}
+
+exampleFunction(); // When called as a regular function, this is the global object
+
+const obj = {
+  method: function() {
+    console.log(this === obj); // true
+  }
+};
+
+obj.method(); // When called as a method of an object, this is the object itself
+
+```
+**javascript is loosely typed language**
+
+# The Scope Chain, 🔥Scope & Lexical Environment
+
+In JavaScript, the concepts of Scope Chain, Scope, and Lexical Environment are fundamental to understanding how the language handles variables and functions. Here’s a brief explanation of each:
+
+**Scope**: Scope refers to the visibility of variables or functions to the executing code1. In JavaScript, a variable or function is visible to the executing code if it is there in the current lexical environment or in the lexical-environment-chain of the enclosing function1. There are three types of scopes in JavaScript:
+
+**Global Scope**: Variables or functions declared at the top of the code, i.e., in the global space, are said to be in the Global Scope. We can access these variables or functions from anywhere inside our code.
+**Local/Function Scope**: When a variable is defined within a function or block, it has a local scope. This means that it can only be accessed within that function or block.
+**Block Scope**: ES6 introduced the let and const keywords, which allow variables to have block scope. This means that variables defined within a block of code (such as within an if statement or a for loop) can only be accessed within that block.
+**Scope Chain**: The Scope Chain is the hierarchy of scopes that will be searched in order to find a function or variable4. It is the process in which the JavaScript engine searches for the value of the variables in the scope of the functions. However, the search is in a lexical manner.
+
+**Lexical Environment**: The Lexical Environment is the local memory with the lexical environment of its parent (lexical parent - where actually parent physically present in the codes). The chain of the lexical environment references is known as the scope chain5. The scope chain defines whether a variable or function is present inside the scope or not.
