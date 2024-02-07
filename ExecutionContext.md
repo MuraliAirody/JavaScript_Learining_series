@@ -103,6 +103,125 @@ In JavaScript, the concepts of Scope Chain, Scope, and Lexical Environment are f
 **Global Scope**: Variables or functions declared at the top of the code, i.e., in the global space, are said to be in the Global Scope. We can access these variables or functions from anywhere inside our code.
 **Local/Function Scope**: When a variable is defined within a function or block, it has a local scope. This means that it can only be accessed within that function or block.
 **Block Scope**: ES6 introduced the let and const keywords, which allow variables to have block scope. This means that variables defined within a block of code (such as within an if statement or a for loop) can only be accessed within that block.
-**Scope Chain**: The Scope Chain is the hierarchy of scopes that will be searched in order to find a function or variable4. It is the process in which the JavaScript engine searches for the value of the variables in the scope of the functions. However, the search is in a lexical manner.
+**Scope Chain**: The Scope Chain is the hierarchy of scopes that will be searched in order to find a function or variable. It is the process in which the JavaScript engine searches for the value of the variables in the scope of the functions. However, the search is in a lexical manner.
 
-**Lexical Environment**: The Lexical Environment is the local memory with the lexical environment of its parent (lexical parent - where actually parent physically present in the codes). The chain of the lexical environment references is known as the scope chain5. The scope chain defines whether a variable or function is present inside the scope or not.
+**Lexical Environment**: The Lexical Environment is the local memory with the lexical environment of its parent (lexical parent - where actually parent physically present in the codes). The chain of the lexical environment references is known as the scope chain. The scope chain defines whether a variable or function is present inside the scope or not.
+
+# let and const ,🔥 Temporal Dead Zone
+
+In JavaScript, let and const are both used for variable declaration, but they have some differences in terms of behavior and scope. Both let and const were introduced in ECMAScript 6 (ES6) to provide block-scoped variables, as opposed to var, which is function-scoped.
+
+Here's a brief overview of each:
+
+let: Variables declared with let can be reassigned but are block-scoped. This means they are only accessible within the block in which they are defined or declared.
+Example:
+
+```javascript
+{
+    let x = 10;
+    console.log(x); // 10
+}
+```
+console.log(x); // ReferenceError: x is not defined
+const: Variables declared with const are block-scoped like let, but they cannot be reassigned. However, it's important to note that for objects and arrays declared with const, their properties or elements can still be modified.
+Example:
+
+```javascript
+const y = 5;
+y = 10; // TypeError: Assignment to constant variable
+
+const obj = { foo: 'bar' };
+obj.foo = 'baz'; // This is allowed
+console.log(obj.foo); // 'baz'
+```
+Now, regarding the Temporal Dead Zone (TDZ): This is a behavior specific to let and const. It's the period between entering a scope (starting from the top of the scope) and the actual declaration of a variable. During this time, accessing the variable will result in a ReferenceError. This is to enforce block scoping rules and to make it clear that the variable exists but isn't yet initialized.
+
+Example:
+
+```javascript
+console.log(x); // ReferenceError: Cannot access 'x' before initialization
+let x = 10;
+```
+In this example, even though x is declared later in the code, accessing it before the declaration results in a ReferenceError due to the Temporal Dead Zone.
+
+# BLOCK SCOPE & Shadowing in JS 🔥
+
+```js
+{
+    var a = 20
+    let b = 10
+    const c = 100
+    console.log(a)
+    console.log(b)
+    console.log(c)
+}
+    console.log(a)
+    console.log(b)
+    console.log(c)
+
+```
+How call stack works 
+```
+
+Block
+  b: <value unavailable>
+  c: <value unavailable>
+Script
+  b: 10
+  c: 100
+Global
+  a: 20
+```
+
+Block Scope: Block scope refers to the visibility and accessibility of variables within a block of code, typically delimited by curly braces {}. In JavaScript, variables declared with let and const have block scope, meaning they are only accessible within the block in which they are defined. This is in contrast to variables declared with var, which have function scope.
+Example:
+
+```javascript
+{
+    let x = 10;
+    console.log(x); // 10
+}
+console.log(x); // ReferenceError: x is not defined
+```
+In this example, the variable x is scoped to the block within the curly braces.
+
+Shadowing: Shadowing occurs when a variable with the same name as one in a higher scope is declared in a nested scope. The inner variable "shadows" the outer one, meaning that references to the variable name within the inner scope will refer to the inner variable, effectively hiding the outer one.
+Example:
+
+```javascript
+let x = 10;
+
+{
+    let x = 20;
+    console.log(x); // 20
+}
+
+console.log(x); // 10
+```
+In this example, the outer variable x is shadowed by the inner variable x within the block. Inside the block, x refers to the inner variable with the value 20, while outside the block, x refers to the outer variable with the value 10
+
+
+ # Closures in JS 🔥
+ A closure in JavaScript is a combination of a function and the lexical environment within which that function was declared. This lexical environment consists of any local variables that were in scope at the time the closure was created. Closures allow functions to maintain access to these variables even after they have exited the scope in which they were defined.
+
+Here's a simple example to illustrate a closure:
+
+```javascript
+function outerFunction() {
+  let outerVariable = 'I am from the outer function';
+  
+  function innerFunction() {
+    console.log(outerVariable);
+  }
+  
+  return innerFunction;
+}
+```
+
+const innerFunc = outerFunction();
+innerFunc(); // Output: "I am from the outer function"
+In this example, innerFunction is defined within outerFunction and has access to the outerVariable even after outerFunction has finished executing. This happens because innerFunction forms a closure over the scope of outerFunction, capturing its lexical environment.
+
+Closures are powerful because they allow for data encapsulation and the creation of private variables and functions. They are commonly used in scenarios such as creating factory functions, implementing module patterns, and handling asynchronous operations.
+
+It's worth noting that closures also play a crucial role in event handling and callback mechanisms in JavaScript. When a callback function is passed to another function and executed later, it maintains access to the variables in its lexical scope, forming a closure. This enables asynchronous operations to work with data from their surrounding context.
