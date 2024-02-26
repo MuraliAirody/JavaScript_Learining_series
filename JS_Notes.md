@@ -225,3 +225,166 @@ In this example, innerFunction is defined within outerFunction and has access to
 Closures are powerful because they allow for data encapsulation and the creation of private variables and functions. They are commonly used in scenarios such as creating factory functions, implementing module patterns, and handling asynchronous operations.
 
 It's worth noting that closures also play a crucial role in event handling and callback mechanisms in JavaScript. When a callback function is passed to another function and executed later, it maintains access to the variables in its lexical scope, forming a closure. This enables asynchronous operations to work with data from their surrounding context.
+
+
+```js
+function main(){
+    for(var i =1;i<6;i++){
+        function sub(i){
+            setTimeout(()=>{
+            console.log(i)
+        },i*1000)
+        }
+        sub(i)
+    }
+}
+
+main()
+```
+
+# 🔥Interview Questions 📝📝
+
+### **function statement / function declaration**
+This is a way to define a function in JavaScript using the function keyword followed by the function name, parameters (if any), and the function body.
+```js
+function add(a, b) {
+    return a + b;
+}
+```
+
+### **function expression**
+This is another way to define a function where the function is assigned to a variable. Function expressions do not have to have a name, but they can.
+```js
+const multiply = function(a, b) {
+    return a * b;
+};
+```
+
+### **Anonymous function**
+An anonymous function is a function without a name. Anonymous functions are often used as arguments to other functions or assigned to variables.
+```js
+setTimeout(function() {
+    console.log('This is an anonymous function.');
+}, 1000);
+```
+
+### **named function expression**
+This is a function expression that has a name. The name is only accessible within the function itself and is useful for recursion and stack traces.
+```js
+const factorial = function factorial(n) {
+    return n <= 1 ? 1 : n * factorial(n - 1);
+};
+```
+
+### **difference between parameter and agrguments**
+Parameters are the variables declared in the function definition. They represent the values that the function expects to receive.
+Arguments are the actual values passed to the function when it is called. They match up with the parameters defined in the function.
+```js
+function greet(name) { // 'name' is a parameter
+    console.log(`Hello, ${name}!`);
+}
+greet('Alice'); // 'Alice' is an argument
+```
+
+### **first class function and arrow function**
+In JavaScript, functions are treated as first-class citizens, which means they can be assigned to variables, passed as arguments to other functions, returned from other functions, and stored in data structures.
+```js
+const add = function(a, b) {
+    return a + b;
+};
+const result = add(2, 3);
+```
+Arrow functions are a concise way to write function expressions in JavaScript. They have a shorter syntax compared to regular function expressions and do not bind their own this value.
+```js
+const multiply = (a, b) => a * b;
+```
+
+### **what is callback function in javascript**
+A callback function is a function passed as an argument to another function, which is then invoked inside the outer function to complete some kind of action or operation.
+Callback functions are commonly used in asynchronous programming to handle tasks like fetching data from a server, responding to user events, or executing code after a time delay.
+They allow for non-blocking behavior, enabling JavaScript to perform tasks asynchronously without halting the execution of other code.
+
+### **javascript is synchronous single threaded language**
+JavaScript is indeed single-threaded, meaning it can only execute one piece of code at a time.
+This means that code is executed sequentially from top to bottom in the order it appears in the script.
+### **blocking the main thread**
+Blocking the main thread refers to situations where long-running synchronous operations prevent other code from executing, leading to unresponsive user interfaces.
+Heavy computations, long-running loops, or synchronous network requests can all block the main thread and degrade the user experience.
+
+```js
+// Example of blocking the main thread with a long-running loop
+
+// Function to simulate a long-running task
+function longRunningTask() {
+    // Simulate a task that takes a significant amount of time
+    const endTime = Date.now() + 5000; // 5 seconds
+    while (Date.now() < endTime) {
+        // Do nothing, just loop for 5 seconds
+    }
+    console.log("Long-running task completed");
+}
+
+// Function to demonstrate blocking behavior
+function blockMainThread() {
+    console.log("Starting long-running task...");
+    longRunningTask();
+    console.log("Main thread unblocked!");
+}
+
+// Call the blocking function
+blockMainThread();
+console.log("Main thread continues...");
+
+```
+
+### **power of callbacks**
+Callbacks provide a powerful mechanism for handling asynchronous operations in JavaScript.
+They allow for code to be executed once an asynchronous task completes, enabling developers to write efficient and responsive applications.
+Callbacks are a fundamental building block for many asynchronous patterns in JavaScript, including event handling, AJAX requests, and timers.
+
+### **deep about event listeners**
+Event listeners are functions that are invoked in response to a specific event occurring in the browser, such as a mouse click, key press, or page load.
+They are used to create interactive web pages by responding to user actions.
+Event listeners can be attached to DOM elements using methods like addEventListener, allowing developers to define custom behavior for various user interactions.
+### **clouser demo with event listeners**
+Closures are functions that have access to variables from their containing scope even after the parent function has finished executing.
+In the context of event listeners, closures are often used to maintain state or access variables from the surrounding scope.
+For example, a closure might be used to keep track of a counter or store data associated with a specific event listener.
+```js
+function createCounter() {
+    let count = 0;
+
+    function incrementCounter() {
+        count++;
+        console.log("Counter incremented to:", count);
+    }
+
+    function decrementCounter() {
+        count--;
+        console.log("Counter decremented to:", count);
+    }
+
+    // Return an object with methods to increment and decrement the counter
+    return {
+        increment: incrementCounter,
+        decrement: decrementCounter
+    };
+}
+
+// Create a counter using the createCounter function
+const counter = createCounter();
+
+// Add event listeners to buttons to increment and decrement the counter
+document.getElementById("incrementBtn").addEventListener("click", counter.increment);
+document.getElementById("decrementBtn").addEventListener("click", counter.decrement);
+
+```
+### **scope demo with event listeners**
+Scope in JavaScript refers to the visibility and lifetime of variables and functions.
+When working with event listeners, it's important to understand how scope affects the availability of variables and functions.
+Variables declared inside a function are only accessible within that function's scope, unless closures are used to capture them.
+### **garbage collection and removeEventlisteners**
+Garbage collection is the process by which JavaScript automatically frees up memory by removing objects that are no longer in use or referenced.
+When removing event listeners, it's important to ensure that all references to the listener function are removed to prevent memory leaks.
+Failing to remove event listeners can prevent the associated DOM elements from being garbage collected, leading to memory leaks and potential performance issues.
+
