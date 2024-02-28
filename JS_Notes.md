@@ -388,3 +388,38 @@ Garbage collection is the process by which JavaScript automatically frees up mem
 When removing event listeners, it's important to ensure that all references to the listener function are removed to prevent memory leaks.
 Failing to remove event listeners can prevent the associated DOM elements from being garbage collected, leading to memory leaks and potential performance issues.
 
+
+# Blocking Main Thread
+
+```js
+ console.log("start);
+
+ setTimeout(()=>{
+  console.log("callback)
+ },5000);
+
+ let startTime  = new Date().getTime();
+ let endTime = startTime;
+
+ while(endTime<startTime + 10000){ //10s delay
+    endTime = new Date().getTime();
+ }
+
+ console.log("End")
+```
+- console.log("start);: This prints "start" to the console, indicating the beginning of execution.
+
+- setTimeout(() => { console.log("callback") }, 5000);: This schedules a callback function to be executed after a delay of 5000 milliseconds (5 seconds). However, it doesn't block the main thread; instead, it sets up a timer that will trigger the callback function asynchronously after the specified delay.
+
+- let startTime = new Date().getTime();: This captures the current time in milliseconds as the start time.
+
+- let endTime = startTime;: Initializes endTime with the same value as startTime.
+
+- while (endTime < startTime + 10000) { ... }: This initiates a while loop that runs until 10 seconds have passed from the startTime. The loop continuously updates endTime with the current time until the condition endTime < startTime + 10000 evaluates to false. During this loop, the main thread is actively engaged in checking the condition and updating endTime, causing it to be blocked.
+
+console.log("End"): Once the loop condition is met, indicating that 10 seconds have passed, this line prints "End" to the console.
+
+**Explanation of blocking the main thread:**
+The main thread is blocked primarily by the while loop (while (endTime < startTime + 10000) { ... }). During this loop, the thread continuously checks the condition endTime < startTime + 10000 and updates endTime. Since this loop doesn't yield control back to the event loop, it monopolizes the main thread's execution, preventing any other code, including asynchronous tasks like the setTimeout callback, from being executed until the loop completes.
+
+Due to this blocking behavior, even though there's an asynchronous setTimeout scheduled to execute after 5 seconds, its execution is delayed until the main thread becomes available after the loop completes. Hence, you may observe "callback" being logged to the console after "End", not after 5 seconds from the "start" message as intended by the setTimeout.
