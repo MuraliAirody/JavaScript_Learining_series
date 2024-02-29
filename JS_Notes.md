@@ -423,3 +423,79 @@ console.log("End"): Once the loop condition is met, indicating that 10 seconds h
 The main thread is blocked primarily by the while loop (while (endTime < startTime + 10000) { ... }). During this loop, the thread continuously checks the condition endTime < startTime + 10000 and updates endTime. Since this loop doesn't yield control back to the event loop, it monopolizes the main thread's execution, preventing any other code, including asynchronous tasks like the setTimeout callback, from being executed until the loop completes.
 
 Due to this blocking behavior, even though there's an asynchronous setTimeout scheduled to execute after 5 seconds, its execution is delayed until the main thread becomes available after the loop completes. Hence, you may observe "callback" being logged to the console after "End", not after 5 seconds from the "start" message as intended by the setTimeout.
+
+# Function Currying
+Currying is a functional programming technique where a function that takes multiple arguments is transformed into a sequence of functions, each taking a single argument. This allows for more flexible and modular code. Here's a basic explanation and example in JavaScript:
+
+```javascript
+// Original function taking multiple arguments
+function add(x, y, z) {
+  return x + y + z;
+}
+
+// Curried version of the function
+function curriedAdd(x) {
+  return function(y) {
+    return function(z) {
+      return x + y + z;
+    };
+  };
+}
+
+// Example usage
+console.log(add(1, 2, 3)); // Outputs: 6
+
+const curried = curriedAdd(1)(2)(3);
+console.log(curried); // Outputs: 6
+```
+
+In the above example, curriedAdd takes the first argument x and returns a function that takes the second argument y, which in turn returns a function that takes the third argument z. This allows you to call curriedAdd with one argument at a time.
+
+Currying can make functions more flexible and composable, as you can partially apply arguments to create new functions with preset values. This is particularly useful in scenarios where you want to reuse a function with some of its arguments pre-determined.
+
+<details>
+<summary><b>Currying offers several advantages in real-world scenarios:</b></summary>
+
+- Partial Application: Currying allows you to create specialized versions of a function by partially applying its arguments. This can be particularly useful when you have a function with many arguments and you frequently need to use it with some arguments fixed. It simplifies the creation of specialized functions on-the-fly.
+
+- Code Reusability: Currying promotes code reuse by allowing you to create specialized functions from a more general one. Instead of defining multiple functions with similar behavior but different arguments, you can define a single function and curry it to create variations as needed.
+
+- Modularity: Currying encourages modular programming. By breaking down functions into smaller, single-purpose functions, you can compose them more easily to build complex behavior. Each curried function can focus on a single aspect of the overall functionality, making the code easier to understand and maintain.
+
+- Functional Composition: Currying fits well with functional programming principles like composition. Composing functions becomes more natural when each function takes only one argument. This allows you to chain functions together more easily, creating pipelines of transformations.
+
+- Flexibility: Currying allows for greater flexibility in function invocation. You can choose to provide arguments one at a time or provide all arguments at once, depending on the context and requirements of your application.
+
+</details>
+<hr>
+
+# Callback Hell
+
+Callback hell, also known as "pyramid of doom," refers to the situation in asynchronous programming where code becomes difficult to read and maintain due to nested callbacks. It occurs when multiple asynchronous operations are chained together in a nested structure, leading to deeply nested callback functions.
+
+**Callback hell can make code:**
+
+- Hard to read: The deeply nested structure makes it challenging to understand the flow of execution and the relationships between different parts of the code.
+
+- Hard to maintain: Adding, removing, or modifying operations becomes difficult and error-prone due to the complex nesting.
+
+- Error-prone: Error handling becomes cumbersome, and it's easy to introduce bugs, especially when dealing with asynchronous code.
+
+```js
+fetchUserDetails(userId, function(userDetails) {
+  // Process user details
+  // Nested callback for fetching cart items
+  fetchCartItems(userId, function(cartItems) {
+    // Process cart items
+    // Nested callback for payment processing
+    processPayment(userDetails, cartItems, function(paymentResult) {
+      // Handle payment result
+      // Nested callback for order confirmation
+      confirmOrder(userDetails, cartItems, orderDetails, function(orderConfirmation) {
+        // Handle order confirmation
+      });
+    });
+  });
+});
+
+```
